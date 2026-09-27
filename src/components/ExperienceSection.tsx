@@ -1,4 +1,33 @@
+import { motion, type Variants } from "motion/react";
 import { experiences } from "./data";
+
+const line: Variants = {
+  hidden: { opacity: 0, y: 40 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] },
+  },
+};
+
+const container: Variants = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.12,
+      delayChildren: 0.1,
+    },
+  },
+};
+
+const row: Variants = {
+  hidden: { opacity: 0, y: 24 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.9, ease: [0.22, 1, 0.36, 1] },
+  },
+};
 
 export default function ExperienceSection() {
   return (
@@ -7,26 +36,45 @@ export default function ExperienceSection() {
       className="min-h-screen bg-neutral-900 text-neutral-100 flex flex-col justify-center px-6 pt-32 pb-16"
     >
       <div className="max-w-3xl mx-auto w-full">
-        <div className="flex items-end justify-between mb-10">
+        <motion.div
+          variants={container}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ amount: 0.3 }}
+          className="flex items-end justify-between mb-10"
+        >
           <div>
-            <p className="font-code text-xs uppercase tracking-widest text-neutral-500 mb-3">
+            <motion.p
+              variants={line}
+              className="font-code text-xs uppercase tracking-widest text-neutral-500 mb-3"
+            >
               Career
-            </p>
+            </motion.p>
 
-            <h2 className="font-display uppercase text-5xl sm:text-7xl leading-none">
+            <motion.h2
+              variants={line}
+              className="font-display uppercase text-5xl sm:text-7xl leading-none"
+            >
               Experience
-            </h2>
+            </motion.h2>
           </div>
 
-          <span className="font-display text-5xl text-neutral-700">
+          <motion.span
+            variants={line}
+            className="font-display text-5xl text-neutral-700"
+          >
             {String(experiences.length).padStart(2, "0")}
-          </span>
-        </div>
+          </motion.span>
+        </motion.div>
 
         <div className="divide-y divide-neutral-700 border-t border-neutral-700">
           {experiences.map((experience, index) => (
-            <div
+            <motion.div
               key={`${experience.company}-${experience.role}`}
+              variants={row}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ amount: 0.3 }}
               className="py-8 group"
             >
               <div className="flex flex-col sm:flex-row gap-5 sm:gap-10">
@@ -69,7 +117,7 @@ export default function ExperienceSection() {
                   </div>
                 </div>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>

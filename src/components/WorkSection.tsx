@@ -1,4 +1,33 @@
+import { motion, type Variants } from "motion/react";
 import { projects } from "./data";
+
+const line: Variants = {
+  hidden: { opacity: 0, y: 40 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] },
+  },
+};
+
+const container: Variants = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.12,
+      delayChildren: 0.1,
+    },
+  },
+};
+
+const row: Variants = {
+  hidden: { opacity: 0, y: 24 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.9, ease: [0.22, 1, 0.36, 1] },
+  },
+};
 
 export default function WorkSection() {
   return (
@@ -7,27 +36,49 @@ export default function WorkSection() {
       className="min-h-screen bg-neutral-200 text-neutral-900 flex flex-col justify-center px-6 pt-32 pb-16"
     >
       <div className="max-w-3xl mx-auto w-full">
-        <div className="flex items-end justify-between mb-10">
+        <motion.div
+          variants={container}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ amount: 0.3 }}
+          className="flex items-end justify-between mb-10"
+        >
           <div>
-            <p className="font-code text-xs uppercase tracking-widest text-neutral-500 mb-3">
+            <motion.p
+              variants={line}
+              className="font-code text-xs uppercase tracking-widest text-neutral-500 mb-3"
+            >
               Projects
-            </p>
+            </motion.p>
 
-            <h2 className="font-display uppercase text-5xl sm:text-7xl leading-none">
+            <motion.h2
+              variants={line}
+              className="font-display uppercase text-5xl sm:text-7xl leading-none"
+            >
               Selected
               <br />
               Work
-            </h2>
+            </motion.h2>
           </div>
 
-          <span className="font-display text-5xl text-neutral-300">
+          <motion.span
+            variants={line}
+            className="font-display text-5xl text-neutral-300"
+          >
             {String(projects.length).padStart(2, "0")}
-          </span>
-        </div>
+          </motion.span>
+        </motion.div>
 
         <div className="divide-y divide-neutral-400 border-t border-neutral-400">
           {projects.map((project, index) => (
-            <div key={project.title} className="py-7 group">
+            <motion.div
+              key={project.title}
+              variants={row}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ amount: 0.3 }}
+              className="py-7 group"
+            >
               <div className="flex gap-4">
                 <span className="font-code text-xs text-neutral-400 pt-1">
                   {String(index + 1).padStart(2, "0")}
@@ -54,7 +105,7 @@ export default function WorkSection() {
                   </div>
                 </div>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>
