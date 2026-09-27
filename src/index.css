@@ -1,0 +1,55 @@
+@import url("https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap");
+@import "tailwindcss";
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+}
+
+.font-display {
+  font-family: "Anton", sans-serif;
+}
+
+.font-code {
+  font-family: "JetBrains Mono", monospace;
+}
+
+html,
+body,
+a,
+button {
+  cursor: none !important;
+}
+
+.cursor-hover {
+  width: 64px !important;
+  height: 64px !important;
+  background-color: white;
+  border-color: transparent;
+}
+
+.cursor-hover-dot {
+  width: 6px !important;
+  height: 6px !important;
+}
+
+.cursor-click {
+  width: 28px !important;
+  height: 28px !important;
+}
+
+@media (hover: none), (pointer: coarse) {
+  .custom-cursor {
+    display: none;
+  }
+
+  html,
+  body,
+  a,
+  button {
+    cursor: auto !important;
+  }
+}
